@@ -1,0 +1,162 @@
+Console.WriteLine("Ex.1");
+string sentence = "This is an      example of  a sentence with many   spaces in     a row.";
+int maxSpaces = 0;
+int currentSpaces = 0;
+
+foreach (char c in sentence)
+{
+    if (c == ' ')
+    {
+        currentSpaces++;
+        if (currentSpaces > maxSpaces)
+        {
+            maxSpaces = currentSpaces;
+        }
+    }
+    else
+    {
+        currentSpaces = 0;
+    }
+}
+
+Console.WriteLine("The largest number of spaces in a row: " + maxSpaces);
+
+Console.WriteLine("Ex.3");
+string word = "Pineapple";
+List<char> uniqueChars = new List<char>();
+
+foreach (char c in word)
+{
+    if (!uniqueChars.Contains(c))
+    {
+        uniqueChars.Add(c);
+    }
+}
+
+int uniqueCount = uniqueChars.Count;
+Console.WriteLine("Number of unique characters in a word: " + uniqueCount);
+
+Console.WriteLine("Ex.4");
+string wordEx4 = "Develop";
+int pos1 = -1, pos2 = -1;
+
+for (int i = 0; i < wordEx4.Length; i++)
+{
+    for (int j = i + 1; j < wordEx4.Length; j++)
+    {
+        if (wordEx4[i] == wordEx4[j])
+        {
+            pos1 = i;
+            pos2 = j;
+            break;
+        }
+    }
+
+    if (pos1 != -1 && pos2 != -1)
+    {
+        break;
+    }
+}
+
+Console.WriteLine("First identical letter: " + wordEx4[pos1] + " in position " + pos1);
+Console.WriteLine("Second identical letter: " + wordEx4[pos2] + " in position " + pos2);
+
+Console.WriteLine("Ex.6");
+string word1Ex6 = "Hello";
+string word2Ex6 = "World";
+string combinedWords = word1Ex6 + word2Ex6;
+
+var uniqueLetters = combinedWords.ToLookup(c => c)
+                                 .Where(g => g.Count() == 1)
+                                 .Select(g => g.Key);
+
+foreach (char c in uniqueLetters)
+{
+    Console.WriteLine(c);
+}
+
+Console.WriteLine("Ex.8");
+string word1Ex8 = "hello";
+string word2Ex8 = "hole";
+REST:
+int choice = 0;
+Console.WriteLine($"Should the repetition of letters be taken into account?\n1 - Yes\n2 - No");
+choice = Convert.ToInt32(Console.ReadLine());
+switch (choice)
+{
+    case 1:
+        goto YES;
+    case 2:
+        goto NO;
+    default:
+        goto REST;
+}
+YES:
+bool canFormWord2 = true;
+foreach (char c in word2Ex8)
+{
+    if (word1Ex8.Contains(c))
+    {
+        word1Ex8 = word1Ex8.Remove(word1Ex8.IndexOf(c), 1);
+    }
+    else
+    {
+        canFormWord2 = false;
+        break;
+    }
+}
+
+if (canFormWord2)
+{
+    Console.WriteLine("The second word can be formed from the first word.");
+    goto EX9;
+}
+else
+{
+    Console.WriteLine("The second word cannot be formed from the first word.");
+    goto EX9;
+}
+NO:
+canFormWord2 = true;
+foreach (char c in word2Ex8.Distinct())
+{
+    if (word1Ex8.Count(x => x == c) < word2Ex8.Count(x => x == c))
+    {
+        canFormWord2 = false;
+        break;
+    }
+}
+
+if (canFormWord2)
+{
+    Console.WriteLine("The second word can be formed from the first word.");
+}
+else
+{
+    Console.WriteLine("The second word cannot be formed from the first word.");
+}
+EX9:
+
+Console.WriteLine("Ex.17");
+string firstWord = "level";
+bool isSymmetric = firstWord.SequenceEqual(firstWord.Reverse());
+bool HasUniqueChars(string wordEx17)
+{
+    return wordEx17.Distinct().Count() == wordEx17.Length;
+}
+
+string[] words = new string[] { "level", "deified", "rotor", "hello" };
+bool found = false;
+foreach (string wordEx17 in words)
+{
+    if (wordEx17 != firstWord && HasUniqueChars(wordEx17) && isSymmetric)
+    {
+        Console.WriteLine(wordEx17);
+        found = true;
+    }
+}
+
+if (!found)
+{
+    Console.WriteLine("No word found that satisfies the criteria.");
+}
