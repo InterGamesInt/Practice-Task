@@ -1,0 +1,109 @@
+using System.Security.Cryptography.X509Certificates;
+
+Console.WriteLine("Ex. 1");
+MainReset2:
+double result = 0;
+double X = 0;
+double loopresult = 0;
+Console.WriteLine("Enter the X value: ");
+X = Convert.ToDouble(Console.ReadLine());
+switch (X) {
+    case (<= 5):
+        result = (Math.Pow(X, 3)/3) + 10;
+        Console.WriteLine($"Y = {result}, if X = {X}.");
+        break;
+    case (> 6 and <= 12):
+        for (int i = 7; i <= X; i++)
+        {
+            loopresult = X * (Math.Pow((i-4),2));
+        }
+        result = loopresult * 6;
+        Console.WriteLine($"Y = {result}, if X = {X}.");
+        break;
+    case (> 12):
+        for (int i = 13; i <= X; i++)
+        {
+            loopresult = X + ((Math.Pow(i,3))/3);
+        }
+        result = loopresult;
+        Console.WriteLine($"Y = {result}, if X = {X}.");
+        break;
+    default:
+        Console.WriteLine("IDK what you did, but you broke program, congrats!");
+        goto MainReset2;
+        break;
+}
+Console.WriteLine($"Ex. 2 \nWelcome to SHIFT-O-MATIC!");
+MainRestart:
+Console.WriteLine($"Choose counting system: \n1. Binary \n2. Octonary");
+int loopanswer = 0;
+string RestChoose;
+int choose;
+int firstnum = 0;
+List<int> ShiftResult = new List<int>();
+choose = Convert.ToInt32(Console.ReadLine());
+switch (choose)
+{
+    case 1:
+        Console.WriteLine("Enter the number, that need to shift: ");
+        firstnum = Convert.ToInt32(Console.ReadLine());
+        while (firstnum > 0)
+        {
+            loopanswer = firstnum % 2;
+            firstnum = firstnum / 2;
+            ShiftResult.Add(loopanswer);
+        }
+        ShiftResult.Reverse();
+        foreach(int element in ShiftResult)
+        {
+            Console.Write($"{element}");
+        }
+        Task.Delay(1000).Wait();
+        CountRestart1:
+        Console.WriteLine($"\nTry again? \nY - Yes. \nN - No.");
+        RestChoose = Console.ReadLine();
+        switch (RestChoose)
+        {
+            case "Y" or "y":
+                goto MainRestart;
+            case "N" or "n":
+                break;
+            default:
+                Console.WriteLine("Wrong choice... Try again.");
+                goto CountRestart1;
+        }
+        break;
+    case 2:
+        Console.WriteLine("Enter the number, that need to shift: ");
+        firstnum = Convert.ToInt32(Console.ReadLine());
+        while (firstnum > 0)
+        {
+            loopanswer = firstnum % 8;
+            firstnum = firstnum / 8;
+            ShiftResult.Add(loopanswer);
+        }
+        ShiftResult.Reverse();
+        foreach (int element in ShiftResult)
+        {
+            Console.Write($"{element}");
+        }
+        Task.Delay(1000).Wait();
+        CountRestart2:
+        Console.WriteLine($"\nTry again? \nY - Yes. \nN - No.");
+        RestChoose = Console.ReadLine();
+        switch (RestChoose)
+        {
+            case "Y" or "y":
+                goto MainRestart;
+            case "N" or "n":
+                break;
+            default:
+                Console.WriteLine("Wrong choice... Try again.");
+                goto CountRestart2;
+        }
+        break;
+    default:
+        Console.WriteLine("Wrong choice... Try again.");
+        Task.Delay(500).Wait();
+        goto MainRestart;
+}
