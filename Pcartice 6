@@ -1,0 +1,91 @@
+using System;
+
+namespace ProgramProducts
+{
+    class Program
+    {
+        enum Browser
+        {
+            Chrome = 1,
+            Firefox,
+            Safari,
+            Edge
+        }
+
+        enum IDE
+        {
+            VisualStudio = 5,
+            Eclipse,
+            IntelliJ,
+            PyCharm
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Author of program: Podhorny Volodymyr");
+            Console.WriteLine("List of software products:");
+            Console.WriteLine($"{(int)Browser.Chrome}. {Browser.Chrome}");
+            Console.WriteLine($"{(int)Browser.Firefox}. {Browser.Firefox}");
+            Console.WriteLine($"{(int)Browser.Safari}. {Browser.Safari}");
+            Console.WriteLine($"{(int)Browser.Edge}. {Browser.Edge}");
+            Console.WriteLine($"{(int)IDE.VisualStudio}. {IDE.VisualStudio}");
+            Console.WriteLine($"{(int)IDE.Eclipse}. {IDE.Eclipse}");
+            Console.WriteLine($"{(int)IDE.IntelliJ}. {IDE.IntelliJ}");
+            Console.WriteLine($"{(int)IDE.PyCharm}. {IDE.PyCharm}");
+
+            Console.WriteLine("\nEnter the numbers of software products that you find popular and convenient, separated by commas:");
+            string input = Console.ReadLine();
+
+            string[] productNumbers = input.Split(',');
+            Console.WriteLine("\nYour favorite browsers:");
+
+            foreach (string number in productNumbers)
+            {
+                if (Enum.IsDefined(typeof(Browser), int.Parse(number)))
+                {
+                    Browser browser = (Browser)Enum.Parse(typeof(Browser), number);
+                    switch (browser)
+                    {
+                        case Browser.Chrome:
+                            Console.WriteLine("Google Chrome - author Google");
+                            break;
+                        case Browser.Firefox:
+                            Console.WriteLine("Mozilla Firefox - author Mozilla");
+                            break;
+                        case Browser.Safari:
+                            Console.WriteLine("Safari - author Apple");
+                            break;
+                        case Browser.Edge:
+                            Console.WriteLine("Microsoft Edge - author Microsoft");
+                            break;
+                    }
+                }
+            }
+
+            Console.WriteLine("\nYour favorite IDEs:");
+            foreach (string number in productNumbers)
+            {
+                if (Enum.IsDefined(typeof(IDE), int.Parse(number)))
+                {
+                    IDE ide = (IDE)Enum.Parse(typeof(IDE), number);
+                    switch (ide)
+                    {
+                        case IDE.VisualStudio:
+                            Console.WriteLine("Microsoft Visual Studio - author Microsoft");
+                            break;
+                        case IDE.Eclipse:
+                            Console.WriteLine("Eclipse - author Eclipse Foundation");
+                            break;
+                        case IDE.IntelliJ:
+                            Console.WriteLine("IntelliJ IDEA - author JetBrains");
+                            break;
+                        case IDE.PyCharm:
+                            Console.WriteLine("PyCharm - author JetBrains");
+                            break;
+                    }
+                }
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
